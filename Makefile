@@ -462,7 +462,11 @@ $(DLSTREAMER_SAMPLE_VIDEOS): ./dlstreamer-pipeline-server/convert_video_to_ts.sh
 	@echo "VERSION=$(VERSION)" >> $@
 	@echo "GID=$$(id -g)" >> $@
 	@echo "UID=$$(id -u)" >> $@
-	@echo "CONTROLLER_AUTH=$$(cat ${SECRETSDIR}/controller.auth 2>/dev/null || echo '')" >> $@
+	@echo "CONTROLLER_AUTH=$$(cat ${SECRETSDIR}/controller.auth)" >> $@
+	@echo "PERCEBRO_AUTH=$$(cat ${SECRETSDIR}/percebro.auth)" >> $@
+	@echo "BROWSER_AUTH=$$(cat ${SECRETSDIR}/browser.auth)" >> $@
+	@echo "CALIBRATION_AUTH=$$(cat ${SECRETSDIR}/calibration.auth)" >> $@
+	@echo "DJANGO_SECRET=\"$$(cat ${SECRETSDIR}/django/secrets.py)\"" >> $@
 
 # ======================= Secrets Management =========================
 

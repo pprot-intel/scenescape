@@ -32,6 +32,8 @@ secrets:
     file: ${SECRETSDIR}/percebro.auth
   controller.auth:
     file: ${SECRETSDIR}/controller.auth
+  controller.auth-env:
+    environment: CONTROLLER_AUTH
   browser.auth:
     file: ${SECRETSDIR}/browser.auth
   calibration.auth:
@@ -99,7 +101,10 @@ services:
       - vol-sample-data:/home/scenescape/SceneScape/sample_data
     secrets:
       - django
-      - controller.auth
+      - source: controller.auth-env
+        target: controller.auth
+        uid: "1001"
+        gid: "1001"
       - percebro.auth
       - browser.auth
       - calibration.auth

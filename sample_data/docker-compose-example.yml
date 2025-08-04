@@ -27,17 +27,15 @@ secrets:
   vdms-server-key:
     file: ${SECRETSDIR}/certs/scenescape-vdms-s.key
   django:
-    file: ${SECRETSDIR}/django
+    environment: DJANGO_SECRET
   percebro.auth:
-    file: ${SECRETSDIR}/percebro.auth
+    environment: PERCEBRO_AUTH
   controller.auth:
-    file: ${SECRETSDIR}/controller.auth
-  controller.auth-env:
     environment: CONTROLLER_AUTH
   browser.auth:
-    file: ${SECRETSDIR}/browser.auth
+    environment: BROWSER_AUTH
   calibration.auth:
-    file: ${SECRETSDIR}/calibration.auth
+    environment: CALIBRATION_AUTH
 
 services:
   ntpserv:
@@ -101,10 +99,7 @@ services:
       - vol-sample-data:/home/scenescape/SceneScape/sample_data
     secrets:
       - django
-      - source: controller.auth-env
-        target: controller.auth
-        uid: "1001"
-        gid: "1001"
+      - controller.auth
       - percebro.auth
       - browser.auth
       - calibration.auth
